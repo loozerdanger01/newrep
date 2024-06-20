@@ -22,18 +22,5 @@ environment {
 			}
 		}
 
-		stage('sonarQube analysis') {
-		environment{
-			scannerHome = tool 'sonar-scanner'
-		}
-
-		steps {
-		withsonarQubeEnv('sonar-server'){
-
-			sh "${scannerHome}/bin/sonar-scanner"
-
-		}
-		}
-	  }
-  }
+    }
 }
