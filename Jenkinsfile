@@ -2,6 +2,9 @@ pipeline {
     agent {
         label 'maven'
     }
+    environment {
+        PATH = "$PATH:/opt/maven/bin"
+    }
     stages {
         stage('Build') {
             steps {
