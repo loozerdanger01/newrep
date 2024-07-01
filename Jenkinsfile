@@ -24,7 +24,7 @@ pipeline {
     }
     stage('SonarQube analysis'){
     environment {
-      scannerHome = tool 'nithi-sonar-scanner' //sonar scanner name should be same as what we have defined in the tools
+      scannerHome = tool 'sonar-server' //sonar scanner name should be same as what we have defined in the tools
     }
     steps {                                 // in the steps we are adding our sonar cube server that is with Sonar Cube environment.
     withSonarQubeEnv('nithi-sonarqube-server') {
