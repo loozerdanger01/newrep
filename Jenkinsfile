@@ -22,5 +22,28 @@ pipeline {
             echo "---------unit test completed -------"
         }
     }
-  }
+    stage('SonarQube analysis'){
+    environment {
+      scannerHome = tool 'sonar-scanner' //sonar scanner name should be same as what we have defined in the tools
+    }
+    steps {                                 // in the steps we are adding our sonar cube server that is with Sonar Cube environment.
+    withSonarQubeEnv('sonar-server') {
+       sh "${scannerHome}/bin/sonar-scanner" // This is going to communicate with our sonar cube server and send the analysis report.
+        }
+      }
+    }
+    
+    stage("Quality Gate") {
+        steps {
+            script {
+            timeout(time: 1, unit: 'HOURS') {
+                def qg = waitForQualityGate()
+                if (qg.status != 'OK') {
+                    error " Pipeline aborted due to quality gate failure: ${qg.status}"
+                }
+            }
+        }
+    }
+}
+}
 }
