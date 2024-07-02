@@ -1,4 +1,5 @@
 def registry = 'https://nithi09.jfrog.io'
+def imageName ='nithi09.jfrog.io/docker-docker-local/nithi09'
 pipeline {
     agent {
         label 'maven'
